@@ -1,0 +1,21 @@
+﻿@model WebApplicationAspNetCoreMVC.Models.Companies
+@{
+    ViewBag.Title = "Добавление";
+}
+
+@*here, for some reason, I started creating an add function, then realized that it was not needed and left*@
+
+
+<form asp-action="create" asp-controller="home">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Name company</label>
+        <input type="text" asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">City</label>
+        <input type="number" asp-for="City" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Отправить" class="btn btn-default" />
+    </div>
+</form>

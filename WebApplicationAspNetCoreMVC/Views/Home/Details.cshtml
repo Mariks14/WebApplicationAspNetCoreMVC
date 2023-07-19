@@ -1,0 +1,202 @@
+﻿@model WebApplicationAspNetCoreMVC.Models.ApplicationContext
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="mydiv">
+    <table class="mytable" >
+
+        @*here I added a reload button and just reload the page, this is a bad implementation, it would be better if the data were rechecked for example by id or updated via javascript and ajax, so I didn't complicate it here*@
+
+        <tr class="myheader"><td>Info</td><td><button class="mybtn" value="@ViewData["id"]" onclick="location.reload()" asp-action="Update">update</button></td></tr>
+        <tr >
+            <td class="brdNone">ID:</td>
+            <td>@ViewData["id"]</td>
+        </tr>
+        <tr>
+            <td class="brdNone">Company name:</td>
+            <td>@ViewData["name"]</td>
+        </tr>
+        <tr>
+            <td class="brdNone">address:</td>
+            <td>@ViewData["address"]</td>
+        </tr>
+        <tr>
+            <td class="brdNone">City:</td>
+            <td>@ViewData["city"]</td>
+        </tr>
+        <tr>
+            <td class="brdNone">State:</td>
+            <td>@ViewData["state"]</td>
+        </tr>
+        
+ 
+    </table>
+
+    <table class="mytable">
+        <tr class="myheader"><td>History</td><td></td></tr>
+    
+        <tr>
+            <td class="myTd">Order Date</td>
+            <td class="myTd">Store City</td>
+        </tr>
+
+        @foreach (var item in @ViewData["history"] as List<History>)
+        {
+            <tr>
+                <td class="brdNone">@item.OrderDate</td>
+                <td class="brdNone">@item.StoreCity</td>
+            </tr>
+        }
+
+    </table>
+
+    <table class="mytable">
+        <tr class="myheader"><td>Notes</td><td></td></tr>
+
+        <tr>
+            <td class="myTd">Invoice number</td>
+            <td class="myTd" >Employee</td>
+        </tr>
+
+        @foreach (var item in @ViewData["notes"] as List<Notes>)
+        {
+            <tr>
+                <td class="brdNone">@item.InvoceNumber</td>
+                <td class="brdNone">@item.Employee</td>
+            </tr>
+        }
+
+    </table>
+
+    <table class="mytable, mytable1" >
+        <tr class="myheader"><td>Employes</td><td></td></tr>
+
+        <tr>
+            <td class="myTd">first name</td>
+            <td class="myTd">last name</td>
+        </tr>
+
+        @foreach (var item in @ViewData["employes"] as List<Employes>)
+        {
+            <tr>
+                <td class="brdNone">@item.FirstName</td>
+                <td class="brdNone">@item.LastName</td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+@*here I implemented the table via javascript and DOM, but I could not fill in the data in the table, I have a problem with the data, I am not very experienced and it seems I am sending them incorrectly, comment and check the addition of 2 tables*@
+
+<script>
+    //window.onload = function () {
+        
+
+        
+        
+    //    const myDiv = document.createElement("div");
+    //    myDiv.classList.add("mydiv");
+
+    //    const infoTable = document.createElement("table");
+    //    infoTable.classList.add("mytable");
+
+    //    const infoHeaderRow = document.createElement("tr");
+    //    infoHeaderRow.classList.add("myheader");
+
+    //    const infoHeaderCell1 = document.createElement("td");
+    //    infoHeaderCell1.textContent = "Info";
+    //    infoHeaderRow.appendChild(infoHeaderCell1);
+
+    //    const infoHeaderCell2 = document.createElement("td");
+    //    const updateButton = document.createElement("button");
+    //    updateButton.classList.add("mybtn");
+    //    updateButton.textContent = "update";
+    //    infoHeaderCell2.appendChild(updateButton);
+    //    infoHeaderRow.appendChild(infoHeaderCell2);
+
+    //    infoTable.appendChild(infoHeaderRow);
+
+    //    const infoRows = [
+    //        ["ID:", "@ViewData["id"]"],
+    //        ["Company name:", "@ViewData["name"]"],
+    //        ["address:", "@ViewData["address"]"],
+    //        ["City:", "@ViewData["city"]"],
+    //        ["State:", "@ViewData["state"]"],
+    //    ];
+
+    //    for (const row of infoRows) {
+    //        const infoTableRow = document.createElement("tr");
+
+    //        const cell1 = document.createElement("td");
+    //        cell1.classList.add("brdNone");
+    //        cell1.textContent = row[0];
+    //        infoTableRow.appendChild(cell1);
+
+    //        const cell2 = document.createElement("td");
+    //        cell2.textContent = row[1];
+    //        infoTableRow.appendChild(cell2);
+
+    //        infoTable.appendChild(infoTableRow);
+    //    }
+
+    //    myDiv.appendChild(infoTable);
+
+    //    const historyTable = document.createElement("table");
+    //    historyTable.classList.add("mytable");
+
+    //    const historyHeaderRow = document.createElement("tr");
+    //    historyHeaderRow.classList.add("myheader");
+
+    //    const historyHeaderCell1 = document.createElement("td");
+    //    historyHeaderCell1.textContent = "History";
+    //    historyHeaderRow.appendChild(historyHeaderCell1);
+
+    //    const historyHeaderCell2 = document.createElement("td");
+    //    historyHeaderRow.appendChild(historyHeaderCell2);
+
+    //    historyTable.appendChild(historyHeaderRow);
+
+    //    const historyDataRow1 = document.createElement("tr");
+
+    //    const historyCell1 = document.createElement("td");
+    //    historyCell1.classList.add("myTd");
+    //    historyCell1.textContent = "Order Date";
+    //    historyDataRow1.appendChild(historyCell1);
+
+    //    const historyCell2 = document.createElement("td");
+    //    historyCell2.classList.add("myTd");
+    //    historyCell2.textContent = "Store City";
+    //    historyDataRow1.appendChild(historyCell2);
+
+    //    historyTable.appendChild(historyDataRow1);
+
+    //    var historyData = @Json.Serialize(ViewData["history"] as List<History>);
+
+    //    for (const item of historyData) {
+    //        const historyDataRow = document.createElement("tr");
+
+    //        const historyCell3 = document.createElement("td");
+    //        historyCell3.classList.add("brdNone");
+    //        historyCell3.textContent = item.OrderDate;
+    //        historyDataRow.appendChild(historyCell3);
+
+    //        const historyCell4 = document.createElement("td");
+    //        historyCell4.classList.add("brdNone");
+    //        historyCell4.textContent = item.StoreCity;
+    //        historyDataRow.appendChild(historyCell4);
+
+    //        historyTable.appendChild(historyDataRow);
+    //    }
+
+    //    myDiv.appendChild(historyTable);
+
+    //    document.body.append(myDiv);
+    //}
+
+    
+
+</script>

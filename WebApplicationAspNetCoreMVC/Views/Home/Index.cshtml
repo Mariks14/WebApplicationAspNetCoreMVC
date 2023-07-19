@@ -1,0 +1,16 @@
+﻿@model IEnumerable<WebApplicationAspNetCoreMVC.Models.Companies>
+@{
+    ViewBag.Title = "Все пользователи";
+}
+@*<a asp-action="Create">Create</a>*@
+<table class="table" onload="myfoo()">
+    <tr style="border: 2px solid black; background-color:darkgrey"><td>Company name</td><td>City</td><td>State</td><td>Phone</td></tr>
+    
+    @foreach (var item in Model)
+    {
+        <tr><td><a asp-action="Details" asp-route-id="@item.Id" asp-route-name="@item.Name" asp-route-address="@item.Address" asp-route-city="@item.City" asp-route-state="@item.State" >@item.Name</a></td><td>@item.City</td><td>@item.State</td><td>@item.Phone</td></tr>
+    }
+</table>
+
+<body >
+</body>
